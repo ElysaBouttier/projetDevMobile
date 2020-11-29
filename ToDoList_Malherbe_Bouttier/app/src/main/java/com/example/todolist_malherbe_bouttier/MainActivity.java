@@ -2,46 +2,59 @@ package com.example.todolist_malherbe_bouttier;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
+    // DECLARE VARIABLES
+    private Button btnEvent1;
+    private Button btnOptionEvent1;
+    private Button btnEvent2;
+    private Button btnOptionEvent2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
-    //Menu
+        //INIT VARIABLES
+        btnEvent1 = (Button) findViewById(R.id.btn_ev);
+        btnEvent2 = (Button) findViewById(R.id.btn_event2);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menu_main_activity, menu);
-        return true;
-    }
-
-    public void showMenu(View v) {
-        PopupMenu menuAdd = new PopupMenu(this, v);
-        menuAdd.setOnMenuItemClickListener(this);
-        menuAdd.inflate(R.menu.menu_main_activity);
-        menuAdd.show();
+        // Clic on event button go to listeActivity view
+        btnEvent1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity();
+            }
+        });
 
     }
 
+    // FUNCTIONS
+    // Change Activity
+    private void changeActivity(){
+        Intent intent = new Intent(MainActivity.this, ListeActivity.class);
+        startActivity(intent);
+    }
+
+    // EVENT LISTENER
+    //Menu for calendar access
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.go_to_calendar:
+
+                // when clic on calendar button : show this message
                 Toast.makeText(this, "Aller vers le calendrier", Toast.LENGTH_SHORT).show();
                 return true;
-
             default:
                 return false;
 
