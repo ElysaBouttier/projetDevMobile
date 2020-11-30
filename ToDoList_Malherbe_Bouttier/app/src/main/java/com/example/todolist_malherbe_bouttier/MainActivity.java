@@ -28,7 +28,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         btnEvent1 = (Button) findViewById(R.id.btn_ev);
         btnEvent2 = (Button) findViewById(R.id.btn_event2);
 
-        // Clic on event button go to listeActivity view
+
+        // --------------- EVENT LISTENER -------------------
+        // Change Activity
+
+        // Go to ListeActivity
         btnEvent1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,15 +41,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         });
 
     }
-
-    // FUNCTIONS
-    // Change Activity
-    private void changeActivity(){
-        Intent intent = new Intent(MainActivity.this, ListeActivity.class);
-        startActivity(intent);
+    // Go to Calendar Activity
+    public void showMenu(View v){
+        PopupMenu popupMenu = new PopupMenu(this, v);
+        popupMenu.setOnMenuItemClickListener(this);
+        popupMenu.inflate(R.menu.menu_main_activity);
+        popupMenu.show();
     }
 
-    // EVENT LISTENER
     //Menu for calendar access
     @Override
     public boolean onMenuItemClick(MenuItem item) {
@@ -60,4 +63,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         }
     }
+
+
+    //------------------- FUNCTIONS ----------------------
+    // Change Activity
+    private void changeActivity(){
+        Intent intent = new Intent(MainActivity.this, ListeActivity.class);
+        startActivity(intent);
+    }
+    //
 }

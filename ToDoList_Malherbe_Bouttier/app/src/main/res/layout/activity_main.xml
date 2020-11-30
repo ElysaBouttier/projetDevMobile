@@ -24,8 +24,7 @@
             android:contentDescription="@string/todo"
             android:onClick="showMenu"
             android:src="@drawable/ic_menu_icone"
-            android:text="@string/menu"
-            tools:ignore="OnClick" />
+            android:text="@string/menu" />
 
         <LinearLayout
             android:layout_width="match_parent"
