@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                 // when clic on calendar button : show this message
                 Toast.makeText(this, "Aller vers le calendrier", Toast.LENGTH_SHORT).show();
+                goToCalendar();
                 return true;
             default:
                 return false;
@@ -72,4 +73,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         startActivity(intent);
     }
     //
+    private void goToCalendar(){
+        Intent calendrar = new Intent(MainActivity.this, CalendarActivity.class);
+        startActivity(calendrar);
+    }
 }
