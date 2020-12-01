@@ -8,7 +8,13 @@
         android:title="Ajouter un événement"
         app:showAsAction="never"
         >
+    </item>
 
+    <item android:id="@+id/go_to_about"
+        android:icon="@drawable/ic_menu_icone"
+        android:title="A Propos"
+        app:showAsAction="never"
+        >
     </item>
 
 </menu>

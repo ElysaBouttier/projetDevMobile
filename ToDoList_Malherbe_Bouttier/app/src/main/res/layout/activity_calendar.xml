@@ -22,24 +22,30 @@
             android:id="@+id/txt_event_name_to_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/cadeau_offrir"
-            android:textAllCaps="false"
-            android:autofillHints="" />
+            android:textAllCaps="false" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="390dp"
-        android:layout_height="353dp"
+        android:layout_width="386dp"
+        android:layout_height="46dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.253">
+        app:layout_constraintVertical_bias="0.711">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:text="TextView"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -49,8 +55,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.838">
 
         <Button
             android:id="@+id/btn_delete_from_calendar"
@@ -64,4 +72,15 @@
             android:layout_height="73dp"
             android:text="@string/ajouter" />
     </LinearLayout>
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="356dp"
+        android:layout_height="375dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
