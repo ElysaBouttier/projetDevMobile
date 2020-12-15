@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "309537591900",
+    "firebase_url": "https://todolist-bouttier-malherbe.firebaseio.com",
+    "project_id": "todolist-bouttier-malherbe",
+    "storage_bucket": "todolist-bouttier-malherbe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309537591900:android:6169ad055bc414c8238c99",
+        "android_client_info": {
+          "package_name": "com.example.todolist_bouttier_malherbe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309537591900-1n324vtute024tb2tfgr180n01pk2u2g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaHo_S_mzjuRVuHszXldn9nK4e8iuOReM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "309537591900-1n324vtute024tb2tfgr180n01pk2u2g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
