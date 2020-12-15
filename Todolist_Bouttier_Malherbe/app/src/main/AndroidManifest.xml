@@ -11,6 +11,7 @@
         android:theme="@style/Theme.Todolist_Bouttier_Malherbe">
         <activity android:name=".EventOptionsActivity"></activity>
         <activity android:name=".EventDetailActivity" />
+        <activity android:name=".AboutActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
