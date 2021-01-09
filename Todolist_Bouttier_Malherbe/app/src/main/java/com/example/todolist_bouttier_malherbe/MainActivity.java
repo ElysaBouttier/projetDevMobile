@@ -1,16 +1,19 @@
 package com.example.todolist_bouttier_malherbe;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +44,30 @@ public class MainActivity extends AppCompatActivity {
             this.startActivity(optionIntent);
         });
     }
+    // ------------------------------------------------------------------------
+    //                               CREATE MENU
+    // ------------------------------------------------------------------------
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_on_top, menu);
+        return  true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.about_choice:
+                Toast.makeText(this, "Redirection vers la page de présentation", Toast.LENGTH_SHORT).show();
+                goToAbout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
+    // ------------------------------------------------------------------------
+    //                         ACCESS TO FIREBASE
+    // ------------------------------------------------------------------------
     private void getDataFromDb(){
         // Connect to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -72,5 +98,37 @@ public class MainActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    // ------------------------------------------------------------------------
+    // ----------------------------METHODS-------------------------------------
+    // ------------------------------------------------------------------------
+
+    // Redirection to About page
+    public void goToAbout(){
+        Intent intent = new Intent(this, AboutActivity.class);
+        startActivity(intent);
+    }
+
+    // Confirmation before exit the app
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Voulez vous quitter ToDoList?")
+                .setCancelable(false)
+                .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
