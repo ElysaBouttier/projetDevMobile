@@ -27,16 +27,12 @@
         tools:text="Event Date"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/event_options"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/name"
         android:layout_alignParentRight="true"
-        android:backgroundTint="@color/light_grey"
-        android:textColor="@color/dark_grey"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        tools:text="···" />
+        android:src="@drawable/more_horiz" />
 
 </RelativeLayout>

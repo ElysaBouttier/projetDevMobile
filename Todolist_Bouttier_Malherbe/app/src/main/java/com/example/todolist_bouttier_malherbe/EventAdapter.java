@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,7 +36,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
             viewHolder = new EventViewHolder();
             viewHolder.name = (Button) convertView.findViewById(R.id.name);
             viewHolder.event_date = (TextView) convertView.findViewById(R.id.event_date);
-            viewHolder.event_options = (Button) convertView.findViewById(R.id.event_options);
+            viewHolder.event_options = (ImageButton) convertView.findViewById(R.id.event_options);
             convertView.setTag(viewHolder);
         }
 
@@ -70,6 +71,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
     private class EventViewHolder{
         public Button name;
         public TextView event_date;
-        public Button event_options;
+        public ImageButton event_options;
     }
 }

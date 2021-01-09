@@ -28,21 +28,21 @@
         tools:text="Informations"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/eventDetailOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Opt"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
+        android:src="@drawable/modify"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/eventDetailDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Suppr"
         android:layout_toLeftOf="@id/eventDetailOption"
-        android:layout_marginRight="10dp" />
+        android:layout_marginRight="10dp"
+        android:src="@drawable/delete"/>
 
 </RelativeLayout>

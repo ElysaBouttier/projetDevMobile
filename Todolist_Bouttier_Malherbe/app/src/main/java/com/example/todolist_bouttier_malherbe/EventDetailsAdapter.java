@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
@@ -38,8 +39,8 @@ public class EventDetailsAdapter extends ArrayAdapter<EventDetails> {
             viewHolder.firstname = (TextView) convertView.findViewById(R.id.firstname);
             viewHolder.information = (TextView) convertView.findViewById(R.id.information);
             viewHolder.checkbox = (CheckBox) convertView.findViewById(R.id.checkbox);
-            viewHolder.eventDetailOption = (Button) convertView.findViewById(R.id.eventDetailOption);
-            viewHolder.eventDetailDelete = (Button) convertView.findViewById(R.id.eventDetailDelete);
+            viewHolder.eventDetailOption = (ImageButton) convertView.findViewById(R.id.eventDetailOption);
+            viewHolder.eventDetailDelete = (ImageButton) convertView.findViewById(R.id.eventDetailDelete);
             convertView.setTag(viewHolder);
         }
 
@@ -88,7 +89,7 @@ public class EventDetailsAdapter extends ArrayAdapter<EventDetails> {
         public TextView firstname;
         public TextView information;
         public CheckBox checkbox;
-        public Button eventDetailOption;
-        public Button eventDetailDelete;
+        public ImageButton eventDetailOption;
+        public ImageButton eventDetailDelete;
     }
 }

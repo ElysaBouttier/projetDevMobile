@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private EventAdapter adapter;
+    private ImageButton addEventButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mListView = findViewById(R.id.listView);
         getDataFromDb();
 
-        Button addEventButton = findViewById(R.id.addEvent);
+        addEventButton = findViewById(R.id.addEvent);
         addEventButton.setOnClickListener((view) -> {
             Intent optionIntent = new Intent(this, EventOptionsActivity.class);
             this.startActivity(optionIntent);
