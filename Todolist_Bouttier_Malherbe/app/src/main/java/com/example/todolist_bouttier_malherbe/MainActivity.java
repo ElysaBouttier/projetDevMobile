@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     private EventAdapter adapter;
     private ImageButton addEventButton;
+    private MenuInflater inflater;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private Intent intent;
+    private AlertDialog alertDialog;
 
 
     @Override
@@ -39,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mListView = findViewById(R.id.listView);
+        addEventButton = findViewById(R.id.addEvent);
+
         getDataFromDb();
 
-        addEventButton = findViewById(R.id.addEvent);
+
         addEventButton.setOnClickListener((view) -> {
             Intent optionIntent = new Intent(this, EventOptionsActivity.class);
             this.startActivity(optionIntent);
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     // ------------------------------------------------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+        inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_on_top, menu);
         return  true;
     }
@@ -69,12 +75,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // ------------------------------------------------------------------------
-    //                         ACCESS TO FIREBASE
+    // ----------------------------METHODS-------------------------------------
     // ------------------------------------------------------------------------
+
+
+    // ----------------------------------------
+    //    -----  ACCESS TO FIREBASE  ------
+    // ----------------------------------------
+
     private void getDataFromDb(){
         // Connect to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("events");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("events");
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             private static final String TAG = "MainActivity-DB Access";
@@ -103,13 +115,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // ------------------------------------------------------------------------
-    // ----------------------------METHODS-------------------------------------
-    // ------------------------------------------------------------------------
+
+    // ----------------------------------------
+    //    ------------  MENU  -------------
+    // ----------------------------------------
 
     // Redirection to About page
     public void goToAbout(){
-        Intent intent = new Intent(this, AboutActivity.class);
+        intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
 
@@ -131,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         dialog.cancel();
                     }
                 });
-        AlertDialog alertDialog = builder.create();
+        alertDialog = builder.create();
         alertDialog.show();
     }
 }

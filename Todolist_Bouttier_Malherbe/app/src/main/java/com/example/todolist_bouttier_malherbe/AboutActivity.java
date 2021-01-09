@@ -14,8 +14,9 @@ public class AboutActivity extends AppCompatActivity {
     private TextView textAbout;
 
     // ------------------------------------------------------------------------
-    // ----------------------------onCreate-------------------------------------
+    // ----------------------------onCreate------------------------------------
     // ------------------------------------------------------------------------
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
