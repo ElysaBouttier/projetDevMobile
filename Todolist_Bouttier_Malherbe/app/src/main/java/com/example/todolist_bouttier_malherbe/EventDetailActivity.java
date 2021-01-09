@@ -2,9 +2,12 @@ package com.example.todolist_bouttier_malherbe;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +25,27 @@ public class EventDetailActivity extends AppCompatActivity {
     private ListView mListView;
     private EventDetailsAdapter adapter;
     private String path;
+    public String eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mListView = findViewById(R.id.listView);
 
         Intent intent = getIntent();
-        path = intent.getStringExtra("path");
+        eventId = intent.getStringExtra("id");
+        path = "events/" + eventId + "/elements/";
+
+        ImageButton addEventDetailButton = findViewById(R.id.addEventDetailButton);
+        addEventDetailButton.setOnClickListener((view) -> {
+            Intent addEventDetailIntent = new Intent(this, AddEventDetailActivity.class);
+            addEventDetailIntent.putExtra("eventId", eventId);
+            this.startActivity(addEventDetailIntent);
+        });
 
         getDataFromDb();
     }
@@ -54,7 +68,11 @@ public class EventDetailActivity extends AppCompatActivity {
                 for(Map.Entry<String, Object> entry : map.entrySet()) {
                     String key = entry.getKey();
                     HashMap value = (HashMap)entry.getValue();
-                    details.add(new EventDetails((String) value.get("firstname"), (String) value.get("information"), (String) value.get("checked"), key));
+                    details.add(new EventDetails((String) value.get("firstname"),
+                            (String) value.get("information"),
+                            key,
+                            (String) value.get("checked"),
+                            path));
                 }
                 adapter = new EventDetailsAdapter(EventDetailActivity.this, details);
                 mListView.setAdapter(adapter);
@@ -66,5 +84,11 @@ public class EventDetailActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(mainIntent, 0);
+        return true;
     }
 }

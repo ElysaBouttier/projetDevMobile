@@ -28,4 +28,21 @@
         tools:text="Informations"
         />
 
+    <Button
+        android:id="@+id/eventDetailOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opt"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        />
+
+    <Button
+        android:id="@+id/eventDetailDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Suppr"
+        android:layout_toLeftOf="@id/eventDetailOption"
+        android:layout_marginRight="10dp" />
+
 </RelativeLayout>

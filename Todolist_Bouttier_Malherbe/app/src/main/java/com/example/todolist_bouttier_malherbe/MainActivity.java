@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,12 +34,18 @@ public class MainActivity extends AppCompatActivity {
 
         mListView = findViewById(R.id.listView);
         getDataFromDb();
+
+        Button addEventButton = findViewById(R.id.addEvent);
+        addEventButton.setOnClickListener((view) -> {
+            Intent optionIntent = new Intent(this, EventOptionsActivity.class);
+            this.startActivity(optionIntent);
+        });
     }
 
     private void getDataFromDb(){
         // Connect to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        DatabaseReference myRef = database.getReference("events");
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             private static final String TAG = "MainActivity-DB Access";
@@ -53,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 for(Map.Entry<String, Object> entry : map.entrySet()) {
                     String key = entry.getKey();
                     HashMap value = (HashMap)entry.getValue();
-                    events.add(new Event((String) value.get("nom-evenement"), (String) value.get("date-evenement"), key));
+                    events.add(new Event((String) value.get("name"), (String) value.get("date"), key));
                 }
                 adapter = new EventAdapter(MainActivity.this, events);
                 mListView.setAdapter(adapter);

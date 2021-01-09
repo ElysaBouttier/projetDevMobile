@@ -3,16 +3,16 @@ package com.example.todolist_bouttier_malherbe;
 public class Event {
     private String name;
     private String date;
-    private String path;
+    private String id;
 
-    public Event(String name, String date, String path) {
+    public Event(String name, String date, String id) {
         this.name = name;
         this.date = date;
-        this.path = path;
+        this.id = id;
     }
 
-    public String getPath() {
-        return path;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -23,8 +23,8 @@ public class Event {
         return date;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {

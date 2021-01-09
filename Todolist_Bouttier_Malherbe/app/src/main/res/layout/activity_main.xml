@@ -9,6 +9,22 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+    </ListView>
+
+    <Button
+        android:id="@+id/addEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="+"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:tint="@color/dark_grey"
+        android:backgroundTint="@color/light_grey"/>
 
 </RelativeLayout>

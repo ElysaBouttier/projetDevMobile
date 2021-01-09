@@ -35,7 +35,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
             viewHolder = new EventViewHolder();
             viewHolder.name = (Button) convertView.findViewById(R.id.name);
             viewHolder.event_date = (TextView) convertView.findViewById(R.id.event_date);
-            viewHolder.options = (Button) convertView.findViewById(R.id.options);
+            viewHolder.event_options = (Button) convertView.findViewById(R.id.event_options);
             convertView.setTag(viewHolder);
         }
 
@@ -46,21 +46,21 @@ public class EventAdapter extends ArrayAdapter<Event> {
         viewHolder.name.setText(event.getName());
         viewHolder.name.setOnClickListener((view) -> {
             //Envoyer vers l'activity event details avec le path
-            Log.i("EventListView", "You clicked Item with path:" + event.getPath());
+            Log.i("EventListView", "You clicked Item with path:" + event.getId());
             // Then you start a new Activity via Intent
             Intent intent = new Intent();
             intent.setClass(this.getContext(), EventDetailActivity.class);
-            intent.putExtra("path", event.getPath());
+            intent.putExtra("id", event.getId());
             this.getContext().startActivity(intent);
         });
         viewHolder.event_date.setText(event.getDate());
-        viewHolder.options.setOnClickListener((view) -> {
+        viewHolder.event_options.setOnClickListener((view) -> {
             //Mettre un menu déroulant avec modifier et supprimer
-            Log.i("EventListView", "You clicked Item Options with path:" + event.getPath());
+            Log.i("EventListView", "You clicked Item Options with path:" + event.getId());
             // Then you start a new Activity via Intent
             Intent intent = new Intent();
             intent.setClass(this.getContext(), EventOptionsActivity.class);
-            intent.putExtra("path", event.getPath());
+            intent.putExtra("id", event.getId());
             this.getContext().startActivity(intent);
         });
 
@@ -70,6 +70,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
     private class EventViewHolder{
         public Button name;
         public TextView event_date;
-        public Button options;
+        public Button event_options;
     }
 }

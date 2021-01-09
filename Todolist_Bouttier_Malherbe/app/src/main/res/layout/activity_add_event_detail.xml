@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddEventDetailActivity">
+
+    <TextView
+        android:id="@+id/firstnameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/firstname"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp" />
+
+    <EditText
+        android:id="@+id/firstameInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/firstnameLabel"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/firstnameLabel"
+        android:layout_alignStart="@id/firstnameLabel"
+        android:autofillHints="@string/firstname"
+        android:hint="@string/firstname"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/informationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/information"
+        android:layout_below="@id/firstameInput"
+        android:layout_marginTop="50dp"
+        android:layout_alignLeft="@id/firstnameLabel"
+        android:layout_alignStart="@id/firstnameLabel" />
+
+    <EditText
+        android:id="@+id/informationInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/informationLabel"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@id/firstnameLabel"
+        android:layout_alignStart="@id/firstnameLabel"
+        android:autofillHints="@string/information"
+        android:hint="@string/information"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/addEventDetailCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        android:layout_below="@id/informationInput"
+        android:layout_marginTop="50dp"
+        android:layout_alignLeft="@id/firstnameLabel"
+        android:layout_marginLeft="20dp"
+        android:layout_alignStart="@id/firstnameLabel"
+        android:layout_marginStart="20dp" />
+
+    <Button
+        android:id="@+id/addEventDetailConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:layout_alignTop="@id/addEventDetailCancel"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="50dp" />
+
+</RelativeLayout>

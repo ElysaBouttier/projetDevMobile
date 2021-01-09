@@ -3,12 +3,14 @@ package com.example.todolist_bouttier_malherbe;
 public class EventDetails {
     private String firstname;
     private String information;
+    private String id;
     private String path;
     private String checked;
 
-    public EventDetails(String firstname, String information, String checked, String path) {
+    public EventDetails(String firstname, String information, String id, String checked, String path) {
         this.firstname = firstname;
         this.information = information;
+        this.id = id;
         this.checked = checked;
         this.path = path;
     }
@@ -19,6 +21,10 @@ public class EventDetails {
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getInformation() {
@@ -35,6 +41,10 @@ public class EventDetails {
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setInformation(String information) {
