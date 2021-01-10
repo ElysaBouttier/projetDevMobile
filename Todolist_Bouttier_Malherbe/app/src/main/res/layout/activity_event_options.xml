@@ -19,7 +19,7 @@
         android:id="@+id/textEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextEdit"
+        android:hint="Evenement"
         android:layout_below="@id/textView"
         android:layout_alignLeft="@id/textView"
         android:layout_marginTop="20dp"/>

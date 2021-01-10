@@ -23,6 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -50,8 +51,12 @@ public class EventOptionsActivity extends AppCompatActivity {
         deleteButton = findViewById(R.id.deleteButton);
 
         // Set default date on calendar to now
+        Date c = Calendar.getInstance().getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+        selectedDate = df.format(c);
         try {
-            calendarView.setDate(new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(Calendar.getInstance().getTime())).getTime(), true, true);
+            calendarView.setDate(new SimpleDateFormat("dd-MM-yyyy").parse(String.valueOf(Calendar.getInstance().getTime())).getTime(), true, true);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -60,7 +65,6 @@ public class EventOptionsActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
-                //selectedDate = sdf.format(new Date(calendarView.getDate()));
                 //selectedDate = String.valueOf(dayOfMonth);
                 selectedDate = dayOfMonth + "-" + (month+1) + "-" + year;
             }
@@ -77,29 +81,37 @@ public class EventOptionsActivity extends AppCompatActivity {
                 DatabaseReference eventDateRef = eventRef.child("date");
                 eventNameRef.setValue(textEdit.getText().toString());
                 eventDateRef.setValue(selectedDate);
-                // Retrun to MainActivity
+                // Return to MainActivity
                 returnToMainActivity();
             });
             // Delete button action
             deleteButton.setOnClickListener((view) -> {
                 DatabaseReference eventRef = database.getReference(path);
                 eventRef.removeValue();
-                // Retrun to MainActivity
+                // Return to MainActivity
                 returnToMainActivity();
             });
         } else {
+            deleteButton.setText("Annuler");
             // Add button action
             addButton.setOnClickListener((view) -> {
                 DatabaseReference eventsRef = database.getReference("events/");
                 DatabaseReference newEvent = eventsRef.push();
                 String newEventId = newEvent.getKey();
                 newEvent.setValue(new Event(textEdit.getText().toString(), selectedDate, newEventId));
-                // Retrun to MainActivity
+                DatabaseReference newEventElements = newEvent.child("elements");
+                DatabaseReference fakeElement = newEventElements.push();
+                String fakeElementId = fakeElement.getKey();
+                fakeElement.setValue("");
+                newEventElements.child(fakeElementId).removeValue();
+
+                // eventsRef.child(newEventId).child("elements").setValue("");
+                // Return to MainActivity
                 returnToMainActivity();
             });
             // Delete button action
             deleteButton.setOnClickListener((view) -> {
-                // Retrun to MainActivity
+                // Return to MainActivity
                 returnToMainActivity();
             });
         }
