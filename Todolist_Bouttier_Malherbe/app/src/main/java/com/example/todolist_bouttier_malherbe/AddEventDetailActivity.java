@@ -92,23 +92,6 @@ public class AddEventDetailActivity extends AppCompatActivity {
                         informationInput.getText().toString(),
                         elementId, "False", path));
 
-                final Integer[] length = new Integer[1];
-                eventElementsRef.child("length").addValueEventListener(new ValueEventListener() {
-                    private static final String TAG = "AddEDAdapter-DB Access";
-
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        length[0] = (Integer) dataSnapshot.getValue();
-                        Log.d(TAG, "Value is: " + length[0]);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
-                eventElementsRef.child("length").setValue(length[0]++);
                 returnToEventDetailActivity();
             });
         }

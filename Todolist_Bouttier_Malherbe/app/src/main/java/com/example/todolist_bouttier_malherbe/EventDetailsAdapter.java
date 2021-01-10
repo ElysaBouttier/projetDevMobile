@@ -88,24 +88,6 @@ public class EventDetailsAdapter extends ArrayAdapter<EventDetails> {
 
         viewHolder.eventDetailDelete.setOnClickListener((view) -> {
             database.getReference(details.getPath() + details.getId()).removeValue();
-            final Integer[] length = new Integer[1];
-            database.getReference(details.getPath() + "length").addValueEventListener(new ValueEventListener() {
-                private static final String TAG = "EDAdapter - DB Access";
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    length[0] = (Integer) dataSnapshot.getValue();
-                    Log.d(TAG, "Value is: " + length[0]);
-                }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w(TAG, "Failed to read value.", error.toException());
-                }
-            });
-            database.getReference(details.getPath() + "length").setValue(length[0]--);
-
         });
 
         return convertView;

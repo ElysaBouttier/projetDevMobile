@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -28,7 +29,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class EventOptionsActivity extends AppCompatActivity {
-    private TextInputEditText textEdit;
+    private EditText textEdit;
     private CalendarView calendarView;
     private Button addButton;
     private Button deleteButton;
@@ -66,12 +67,26 @@ public class EventOptionsActivity extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
                 //selectedDate = String.valueOf(dayOfMonth);
-                selectedDate = dayOfMonth + "-" + (month+1) + "-" + year;
+                String stringDay;
+                String stringMonth;
+
+                if(month+1 < 10) {
+                    stringMonth = "-0" + (month + 1);
+                } else {
+                    stringMonth = "-" + (month + 1);
+                }
+                if (dayOfMonth < 10){
+                    stringDay = "-0" + dayOfMonth;
+                } else {
+                    stringDay = "-" + dayOfMonth;
+                }
+                selectedDate = stringDay + "-" + stringMonth + "-" + year;
             }
         });
 
         // Checks if the event exists already
         if(getIntent().getStringExtra("id") != null){
+            addButton.setText("Modifier");
             path = "events/" + getIntent().getStringExtra("id");
             getDataFromDb(path);
             // Add button action
@@ -99,7 +114,7 @@ public class EventOptionsActivity extends AppCompatActivity {
                 DatabaseReference newEvent = eventsRef.push();
                 String newEventId = newEvent.getKey();
                 newEvent.setValue(new Event(textEdit.getText().toString(), selectedDate, newEventId));
-                DatabaseReference newEventElements = newEvent.child("elements");
+                DatabaseReference newEventElements = database.getReference("events/" + newEventId + "/elements");
                 newEventElements.child("length").setValue(0);
 
                 // eventsRef.child(newEventId).child("elements").setValue("");
