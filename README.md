@@ -19,12 +19,21 @@ de chaque événement que vous avez crée.
 ## Ajouter un nouvel évenement :
 
 Cliquez sur le bouton
+![Alt text]( https://github.com/ElysaBouttier/projetDevMobile/blob/main/Todolist_Bouttier_Malherbe/app/src/main/res/drawable-v24/add.png?raw=true "add")
+
 Sélectionnez une date
+![Alt text]( https://github.com/ElysaBouttier/projetDevMobile/blob/main/Todolist_Bouttier_Malherbe/app/src/main/res/drawable-v24/calendar.png?raw=true "calendar")
+
 Validez.
 
 ## Modifier un évenement:
 
+![Alt text]( https://github.com/ElysaBouttier/projetDevMobile/blob/main/Todolist_Bouttier_Malherbe/app/src/main/res/drawable-v24/noel.png?raw=true "modify")
+
+Cliquez sur les "..." à droite, ça vous amènera à la page du calendrier où vous pourrez modifier la date où le titre.
+
 ## Supprimer un évenement:
+
 
 ## Se rendre sur l'évenement :
 
