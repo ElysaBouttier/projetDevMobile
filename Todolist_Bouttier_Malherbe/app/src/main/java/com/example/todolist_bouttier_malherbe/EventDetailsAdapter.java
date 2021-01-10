@@ -2,6 +2,7 @@ package com.example.todolist_bouttier_malherbe;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,19 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.google.firebase.database.FirebaseDatabase.getInstance;
+import static java.lang.Integer.parseInt;
 
 public class EventDetailsAdapter extends ArrayAdapter<EventDetails> {
     //details est la liste des modèles à afficher
@@ -79,6 +87,24 @@ public class EventDetailsAdapter extends ArrayAdapter<EventDetails> {
 
         viewHolder.eventDetailDelete.setOnClickListener((view) -> {
             database.getReference(details.getPath() + details.getId()).removeValue();
+            final Integer[] length = new Integer[1];
+            database.getReference(details.getPath() + "length").addValueEventListener(new ValueEventListener() {
+                private static final String TAG = "EDAdapter - DB Access";
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    length[0] = (Integer) dataSnapshot.getValue();
+                    Log.d(TAG, "Value is: " + length[0]);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+            database.getReference(details.getPath() + "length").setValue(length[0]--);
+
         });
 
         return convertView;

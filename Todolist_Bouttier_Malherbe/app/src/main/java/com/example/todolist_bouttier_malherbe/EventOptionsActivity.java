@@ -100,10 +100,7 @@ public class EventOptionsActivity extends AppCompatActivity {
                 String newEventId = newEvent.getKey();
                 newEvent.setValue(new Event(textEdit.getText().toString(), selectedDate, newEventId));
                 DatabaseReference newEventElements = newEvent.child("elements");
-                DatabaseReference fakeElement = newEventElements.push();
-                String fakeElementId = fakeElement.getKey();
-                fakeElement.setValue("");
-                newEventElements.child(fakeElementId).removeValue();
+                newEventElements.child("length").setValue(0);
 
                 // eventsRef.child(newEventId).child("elements").setValue("");
                 // Return to MainActivity

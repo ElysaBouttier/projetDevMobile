@@ -38,12 +38,12 @@ public class AddEventDetailActivity extends AppCompatActivity {
         String path = "events/" + eventId + "/elements/";
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference eventElementsref = database.getReference(path);
+        DatabaseReference eventElementsRef = database.getReference(path);
 
         if(intent.getStringExtra("elementId") != null){
             String elementId = intent.getStringExtra("elementId");
 
-            DatabaseReference eventDetailRef = eventElementsref.child(elementId);
+            DatabaseReference eventDetailRef = eventElementsRef.child(elementId);
 
             eventDetailRef.addValueEventListener(new ValueEventListener() {
                 private static final String TAG = "AddEventDetail-DBAccess";
@@ -71,11 +71,29 @@ public class AddEventDetailActivity extends AppCompatActivity {
             });
         } else {
             OKButton.setOnClickListener((view) -> {
-                DatabaseReference newElement = eventElementsref.push();
+                DatabaseReference newElement = eventElementsRef.push();
                 String elementId = newElement.getKey();
                 newElement.setValue(new EventDetails(firstnameInput.getText().toString(),
                         informationInput.getText().toString(),
                         elementId, "False", path));
+
+                final Integer[] length = new Integer[1];
+                eventElementsRef.child("length").addValueEventListener(new ValueEventListener() {
+                    private static final String TAG = "AddEDAdapter-DB Access";
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        length[0] = (Integer) dataSnapshot.getValue();
+                        Log.d(TAG, "Value is: " + length[0]);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
+                eventElementsRef.child("length").setValue(length[0]++);
                 returnToEventDetailActivity();
             });
         }

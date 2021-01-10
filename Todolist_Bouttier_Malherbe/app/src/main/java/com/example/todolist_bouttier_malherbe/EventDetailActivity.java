@@ -67,12 +67,16 @@ public class EventDetailActivity extends AppCompatActivity {
                 List<EventDetails> details = new ArrayList<EventDetails>();
                 for(Map.Entry<String, Object> entry : map.entrySet()) {
                     String key = entry.getKey();
-                    HashMap value = (HashMap)entry.getValue();
-                    details.add(new EventDetails((String) value.get("firstname"),
-                            (String) value.get("information"),
-                            key,
-                            (String) value.get("checked"),
-                            path));
+                    if(key.equals("length")) {
+                        break;
+                    } else {
+                        HashMap value = (HashMap) entry.getValue();
+                        details.add(new EventDetails((String) value.get("firstname"),
+                                (String) value.get("information"),
+                                key,
+                                (String) value.get("checked"),
+                                path));
+                    }
                 }
                 adapter = new EventDetailsAdapter(EventDetailActivity.this, details);
                 mListView.setAdapter(adapter);
