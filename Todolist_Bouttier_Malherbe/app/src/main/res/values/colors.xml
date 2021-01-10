@@ -10,4 +10,7 @@
     <color name="light_grey">#FFAAAAAA</color>
     <color name="dark_grey">#FF333333</color>
     <color name="bleuelight">#8000BFFF</color>
+    <color name="topbleue">#3F3D7C</color>
+    <color name="bleueWhite">#96C3EC</color>
+    <color name="redRibbon">#C32633</color>
 </resources>

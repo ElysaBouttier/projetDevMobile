@@ -4,6 +4,14 @@
     <string name="add_button">Add Button</string>
     <string name="firstname">Firstname</string>
     <string name="information">Information</string>
-    <string name="cancel">Cancel</string>
+    <string name="cancel">Annuler</string>
     <string name="ok">OK</string>
+
+    <!-- ADDED FOR THE PROJECT -->
+    <string name="about_text">
+        "Notre application est le produit d'un travail scolaire.\n "
+        "Elle à été concue par 2 étudiants en 3ième année de developpement informatique de l'école Ynov Toulouse".\n"
+        Simple d'utilisation, elle permet lors des fêtes de famille d'avoir une liste pour aider dans le choix des cadeaux. \n\n"
+        "Sur le même modèle qu'une liste de mariage, cette application s'adapte aux événements de la famille.\n"
+    </string>
 </resources>

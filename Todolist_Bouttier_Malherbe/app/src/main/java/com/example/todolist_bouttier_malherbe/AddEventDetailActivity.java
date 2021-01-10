@@ -18,36 +18,50 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Map;
 
 public class AddEventDetailActivity extends AppCompatActivity {
+
+    // DECLARE PRIVATE VARIABLES
     private String eventId;
+    private Button OKButton;
+    private Button cancelButton;
+    private EditText firstnameInput;
+    private EditText informationInput;
+    private Intent intent;
+    private FirebaseDatabase database;
+    private DatabaseReference eventElementsRef;
+    private DatabaseReference eventDetailRef;
+
+    // ------------------------------------------------------------------------
+    // ----------------------------onCreate-------------------------------------
+    // ------------------------------------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_detail);
 
+        // Back Button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Button OKButton = findViewById(R.id.addEventDetailConfirm);
-        Button cancelButton = findViewById(R.id.addEventDetailCancel);
-
-        EditText firstnameInput = findViewById(R.id.firstameInput);
-        EditText informationInput = findViewById(R.id.informationInput);
-
-        Intent intent = getIntent();
+        // INITIATE VARIABLES
+        OKButton = (Button)findViewById(R.id.addEventDetailConfirm);
+        cancelButton = (Button)findViewById(R.id.addEventDetailCancel);
+        firstnameInput = (EditText)findViewById(R.id.firstameInput);
+        informationInput = (EditText)findViewById(R.id.informationInput);
+        intent = getIntent();
         eventId = intent.getStringExtra("eventId");
         String path = "events/" + eventId + "/elements/";
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference eventElementsRef = database.getReference(path);
+        database = FirebaseDatabase.getInstance();
+        eventElementsRef = database.getReference(path);
 
         if(intent.getStringExtra("elementId") != null){
+            // In fireBase
             String elementId = intent.getStringExtra("elementId");
-
-            DatabaseReference eventDetailRef = eventElementsRef.child(elementId);
-
+            eventDetailRef = eventElementsRef.child(elementId);
             eventDetailRef.addValueEventListener(new ValueEventListener() {
                 private static final String TAG = "AddEventDetail-DBAccess";
 
+
+                // Read Database
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     // This method is called once with the initial value and again
@@ -63,6 +77,7 @@ public class AddEventDetailActivity extends AppCompatActivity {
                     }
             });
 
+            // Add value in Database
             OKButton.setOnClickListener((view) -> {
                 eventDetailRef.child("firstname").setValue(firstnameInput.getText().toString());
                 eventDetailRef.child("information").setValue(informationInput.getText().toString());
@@ -98,10 +113,15 @@ public class AddEventDetailActivity extends AppCompatActivity {
             });
         }
 
+        // Database isn't change
         cancelButton.setOnClickListener((view) -> {
             returnToEventDetailActivity();
         });
     }
+
+    // ------------------------------------------------------------------------
+    // ----------------------------METHODS-------------------------------------
+    // ------------------------------------------------------------------------
 
     public boolean onOptionsItemSelected(MenuItem item){
         Intent eventDetailIntent = new Intent(getApplicationContext(), EventDetailActivity.class);

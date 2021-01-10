@@ -22,25 +22,38 @@ import java.util.List;
 import java.util.Map;
 
 public class EventDetailActivity extends AppCompatActivity {
+
+    // DECLARE PRIVATE VARIABLES
     private ListView mListView;
     private EventDetailsAdapter adapter;
     private String path;
     public String eventId;
+    private Intent intent;
+    private ImageButton addEventDetailButton;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private Intent mainIntent;
 
+    // ------------------------------------------------------------------------
+    // ----------------------------onCreate------------------------------------
+    // ------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 
+        mListView = findViewById(R.id.listView);
+        intent = getIntent();
+        addEventDetailButton = (ImageButton)findViewById(R.id.addEventDetailButton);
+
+        // Back Button
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mListView = findViewById(R.id.listView);
 
-        Intent intent = getIntent();
         eventId = intent.getStringExtra("id");
         path = "events/" + eventId + "/elements/";
 
-        ImageButton addEventDetailButton = findViewById(R.id.addEventDetailButton);
+        // add an eventDetail on click
         addEventDetailButton.setOnClickListener((view) -> {
             Intent addEventDetailIntent = new Intent(this, AddEventDetailActivity.class);
             addEventDetailIntent.putExtra("eventId", eventId);
@@ -52,8 +65,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void getDataFromDb(){
         // Connect to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference(path);
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(path);
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             private static final String TAG = "EDActivity - DB Access";
@@ -91,7 +104,7 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+        mainIntent = new Intent(getApplicationContext(), MainActivity.class);
         startActivityForResult(mainIntent, 0);
         return true;
     }
